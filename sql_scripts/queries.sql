@@ -1,8 +1,9 @@
 -- Top promotions by revenue
-SELECT p.promo_id, SUM(o.total_amount) AS revenue_generated
+SELECT p.promo_id,
+    SUM(o.total_amount) AS revenue_generated
 FROM orders o
-JOIN order_items oi ON o.order_id = oi.order_id
-JOIN promotions p ON oi.product_id = p.product_id
+    JOIN order_items oi ON o.order_id = oi.order_id
+    JOIN promotions p ON oi.product_id = p.product_id
 WHERE o.discount_applied = TRUE
 GROUP BY p.promo_id
 ORDER BY revenue_generated DESC;
